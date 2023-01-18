@@ -10,7 +10,7 @@ extern "C"
     // self's type.
     typedef unsigned long long size_t;
 
-    typedef unsigned short bool;
+    typedef unsigned short BOOL;
 #define True 1
 #define False 0
 
@@ -21,9 +21,9 @@ extern "C"
     } __Var__;
     typedef __Var__ *dataset;
 
-#define __dataset_null__ ((void *)0)
-#define __dataset_end__ ((void *)-1)
-#define __dataset_endVar__ ((void *)-2)
+#define __dataset_null__ ((__Var__ *)0)
+#define __dataset_end__ ((__Var__ *)-1)
+#define __dataset_endVar__ ((__Var__ *)-2)
 
     extern dataset dataset_create(size_t begin_size)
     {
@@ -38,7 +38,7 @@ extern "C"
         return set;
     }
 
-    extern bool dataset_reset_size(dataset *set, size_t reset_size)
+    extern BOOL dataset_reset_size(dataset *set, size_t reset_size)
     {
         dataset temp = (dataset)calloc(reset_size, sizeof(__Var__));
         temp[reset_size - 1].point = __dataset_end__;
@@ -77,7 +77,7 @@ extern "C"
         return i + 1;
     }
 
-    extern bool dataset_addend(dataset *set, __Var__ *v)
+    extern BOOL dataset_addend(dataset *set, __Var__ *v)
     {
         size_t length = dataset_length(set);
         size_t size = dataset_sizeof(set);
@@ -111,7 +111,7 @@ extern "C"
         return True;
     }
 
-    extern bool dataset_addendn(dataset *set, size_t n, ...)
+    extern BOOL dataset_addendn(dataset *set, size_t n, ...)
     {
         va_list valist;
         va_start(valist, n);
@@ -157,7 +157,7 @@ extern "C"
         return True;
     }
 
-    extern bool dataset_cat(dataset *set, dataset *catend)
+    extern BOOL dataset_cat(dataset *set, dataset *catend)
     {
         size_t set_size = dataset_sizeof(set);
         size_t catend_size = dataset_sizeof(catend);
